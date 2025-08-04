@@ -60,11 +60,17 @@ const App: React.FC = () => {
   return (
     <div className="bg-black min-h-screen text-white flex flex-col items-center justify-between p-4 sm:p-6 relative overflow-hidden">
       
+      {/* Background Watermark */}
+      <div className="absolute inset-0 z-0 flex items-center justify-start pointer-events-none opacity-5" aria-hidden="true">
+        <img src="/logo.png" alt="" className="w-2/3 max-w-xl -translate-x-1/4" />
+      </div>
+
       <GoldenParticles />
 
       <div className="relative z-10 w-full flex flex-col items-center justify-between flex-grow min-h-screen">
         <main className="w-full flex flex-col items-center justify-center flex-grow">
           <header className="text-center mb-10 mt-8">
+            <img src="/logo.png" alt="Luxury Studio Logo" className="w-24 h-24 mx-auto mb-4" />
             <h1 className="font-cinzel text-4xl sm:text-5xl font-bold text-amber-300 tracking-widest">
             Luxury Studio
             </h1>
