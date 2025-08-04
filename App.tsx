@@ -76,7 +76,7 @@ const App: React.FC = () => {
             <img 
               src="/logo.png"
               alt="Luxury Studio Logo"
-              className="w-36 sm:w-48 h-auto mx-auto mb-2 filter drop-shadow-[0_2px_5px_rgba(251,191,36,0.4)]"
+              className="w-36 sm:w-48 h-auto mx-auto mb-2"
             />
             <h1 className="font-cinzel text-4xl sm:text-5xl font-bold text-amber-300 tracking-widest">
             Luxury Studio
