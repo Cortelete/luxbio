@@ -64,7 +64,7 @@ const App: React.FC = () => {
 
       {/* Background Logo Watermark */}
       <img
-        src="/logo.png"
+        src="./logo.png"
         alt="Luxury Studio background signature"
         className="absolute top-1/2 left-[-50%] sm:left-[-45%] transform -translate-y-1/2 w-[150%] sm:w-[110%] h-auto max-w-none opacity-[0.04] pointer-events-none z-0"
         aria-hidden="true"
@@ -74,9 +74,9 @@ const App: React.FC = () => {
         <main className="w-full flex flex-col items-center justify-center flex-grow">
           <header className="text-center mb-10 mt-8">
             <img 
-              src="/logo.png"
+              src="./logo.png"
               alt="Luxury Studio Logo"
-              className="w-36 sm:w-48 h-auto mx-auto mb-2"
+              className="w-36 sm:w-48 h-auto mx-auto mb-2 object-contain"
             />
             <h1 className="font-cinzel text-4xl sm:text-5xl font-bold text-amber-300 tracking-widest">
             Luxury Studio
