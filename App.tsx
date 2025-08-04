@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import LinkButton from './components/LinkButton';
 import Modal from './components/Modal';
 import Footer from './components/Footer';
 import GoldenParticles from './components/GoldenParticles';
 import { FormData } from './types';
+import { logoBase64 } from './assets/logo';
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,7 +65,7 @@ const App: React.FC = () => {
 
       {/* Background Logo Watermark */}
       <img
-        src="./assets/logo.png"
+        src={logoBase64}
         alt="Luxury Studio background signature"
         className="absolute top-1/2 left-[-50%] sm:left-[-45%] transform -translate-y-1/2 w-[150%] sm:w-[110%] h-auto max-w-none opacity-[0.04] pointer-events-none z-0"
         aria-hidden="true"
@@ -73,7 +75,7 @@ const App: React.FC = () => {
         <main className="w-full flex flex-col items-center justify-center flex-grow">
           <header className="text-center mb-10 mt-8">
             <img 
-              src="./assets/logo.png"
+              src={logoBase64}
               alt="Luxury Studio Logo"
               className="w-36 sm:w-48 h-auto mx-auto mb-2 filter drop-shadow-[0_2px_5px_rgba(251,191,36,0.4)]"
             />

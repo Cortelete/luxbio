@@ -1,0 +1,3 @@
+// This file was created to resolve the module error.
+// It contains a base64 encoded SVG logo that matches the site's branding.
+export const logoBase64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMTUwIDE1MCI+PGRlZnM+PHN0eWxlPi5hIHtmb250LWZhbWlseTogQ2luemVsLCBzZXJpZjsgZm9udC1zaXplOiA4MHB4OyBmaWxsOiAjZmJiZjI0OyBmb250LXdlaWdodDogNzAwO308L3N0eWxlPjwvZGVmcz48dGV4dCBjbGFzcz0iYSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjUuMjkgOTUuMjgpIj5MUzwvdGV4dD48L3N2Zz4=';
