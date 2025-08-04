@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         </a>
       </p>
       <p>
-        Desenvolvido com ✨ por{' '}
+        Desenvolvido por{' '}
         <a href="https://www.instagram.com/inteligenciarte.ia" target="_blank" rel="noopener noreferrer" className="font-semibold text-stone-300 hover:text-amber-300 transition-colors">
           @inteligenciarte.ia
         </a>
