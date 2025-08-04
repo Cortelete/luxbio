@@ -62,7 +62,7 @@ const App: React.FC = () => {
       
       {/* Background Watermark */}
       <div className="absolute inset-0 z-0 flex items-center justify-start pointer-events-none opacity-5" aria-hidden="true">
-        <img src="/logo.png?v=2" alt="" className="w-2/3 max-w-xl -translate-x-1/4" />
+        <img src="/logo.png?v=2" alt="" className="w-2/3 max-w-xl -translate-x-1/4" loading="lazy" />
       </div>
 
       <GoldenParticles />
