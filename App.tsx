@@ -73,10 +73,10 @@ const App: React.FC = () => {
       <div className="relative z-10 w-full flex flex-col items-center justify-between flex-grow min-h-screen">
         <main className="w-full flex flex-col items-center justify-center flex-grow">
           <header className="text-center mb-10 mt-8">
-            <img 
+            <img
               src="./logo.png"
               alt="Luxury Studio Logo"
-              className="w-36 sm:w-48 h-auto mx-auto mb-2 object-contain"
+              className="mx-auto h-24 w-auto mb-4 object-contain"
             />
             <h1 className="font-cinzel text-4xl sm:text-5xl font-bold text-amber-300 tracking-widest">
             Luxury Studio

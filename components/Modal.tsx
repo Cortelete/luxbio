@@ -58,8 +58,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, formData, setFormData, o
     setFormData(prev => ({
       ...prev,
       wantsSpecificDate: checked,
-      // If user wants a specific date, clear the general preferences.
-      // If they uncheck it, they can re-select general preferences.
       preferredPeriods: checked ? [] : prev.preferredPeriods,
       preferredWeekDays: checked ? [] : prev.preferredWeekDays,
     }));
@@ -97,8 +95,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, formData, setFormData, o
   const isFormValid = formData.name.trim() !== '' && formData.procedure.length > 0 && isTimePreferenceValid;
 
   // --- Progressive Disclosure Logic ---
-  const showTimeAndDate = formData.name.trim() !== '';
-  const showServices = showTimeAndDate && isTimePreferenceValid;
+  const showServices = formData.name.trim() !== '';
+  const showTimeAndDate = showServices && formData.procedure.length > 0;
 
   return (
     <div 
@@ -140,8 +138,53 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, formData, setFormData, o
                 placeholder="Ex: Maria da Silva"
               />
             </div>
+            
+            {/* Step 2: Show services when name is filled */}
+            {showServices && (
+                <div className="fade-in space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">Qual serviço?</label>
+                        <div className="space-y-2 rounded-lg border border-gray-700 p-3">
+                            {Object.values(ProcedureCategory).map((cat) => (
+                            <label key={cat} className="flex items-center space-x-3 group cursor-pointer">
+                                <input type="checkbox" checked={selectedCategories.includes(cat)} onChange={() => handleCategoryChange(cat)} className="sr-only"/>
+                                <div className={`w-5 h-5 border-2 rounded-sm flex-shrink-0 flex items-center justify-center transition-all duration-200 ${selectedCategories.includes(cat) ? 'bg-amber-400 border-amber-400' : 'border-gray-500 group-hover:border-amber-400'}`}>
+                                {selectedCategories.includes(cat) && <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-black" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                                </div>
+                                <span className="text-gray-300 group-hover:text-white transition-colors">{cat}</span>
+                            </label>
+                            ))}
+                        </div>
+                    </div>
 
-            {/* Step 2: Show time preferences when name is filled */}
+                    {selectedCategories.length > 0 && (
+                        <div className="fade-in space-y-4">
+                            <label className="block text-sm font-medium text-gray-300">Qual procedimento?</label>
+                            <div className="space-y-3 rounded-lg border border-gray-700 p-3 max-h-48 overflow-y-auto">
+                            {selectedCategories.map(category => (
+                                <div key={category}>
+                                <p className="font-semibold text-amber-300/90 text-sm mb-2">{category}</p>
+                                <div className="space-y-2 pl-2 border-l-2 border-gray-700/50">
+                                    {procedures[category].map((item) => (
+                                    <label key={item} className={`flex items-center space-x-3 group ${item.includes('(em breve)') ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}>
+                                        <input type="checkbox" checked={formData.procedure.includes(item)} onChange={() => handleProcedureChange(item)} disabled={item.includes('(em breve)')} className="sr-only"/>
+                                        <div className={`w-5 h-5 border-2 rounded-sm flex-shrink-0 flex items-center justify-center transition-all duration-200 ${formData.procedure.includes(item) ? 'bg-amber-400 border-amber-400' : 'border-gray-500 group-hover:border-amber-400'}`}>
+                                        {formData.procedure.includes(item) && <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-black" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
+                                        </div>
+                                        <span className="text-gray-300 group-hover:text-white transition-colors">{item}</span>
+                                    </label>
+                                    ))}
+                                </div>
+                                </div>
+                            ))}
+                            </div>
+                             {formData.procedure.length === 0 && <p className="text-xs text-red-400/80 pt-1">Por favor, selecione ao menos um procedimento.</p>}
+                        </div>
+                    )}
+                </div>
+            )}
+            
+            {/* Step 3: Show time preferences when a procedure is selected */}
             {showTimeAndDate && (
                 <div className="fade-in space-y-5">
                     <fieldset className="rounded-lg border border-gray-700 p-3">
@@ -202,51 +245,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, formData, setFormData, o
                     {showTimeAndDate && !isTimePreferenceValid && (formData.preferredPeriods.length > 0 || formData.preferredWeekDays.length > 0 || (formData.wantsSpecificDate && formData.specificDate === '')) &&
                         <p className="text-xs text-red-400/80 pt-1 -mt-4">Por favor, complete sua preferência de horário ou selecione uma data.</p>
                     }
-                </div>
-            )}
-          
-            {/* Step 3 & 4: Show services and procedures */}
-            {showServices && (
-                <div className="fade-in space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">Qual serviço?</label>
-                        <div className="space-y-2 rounded-lg border border-gray-700 p-3">
-                            {Object.values(ProcedureCategory).map((cat) => (
-                            <label key={cat} className="flex items-center space-x-3 group cursor-pointer">
-                                <input type="checkbox" checked={selectedCategories.includes(cat)} onChange={() => handleCategoryChange(cat)} className="sr-only"/>
-                                <div className={`w-5 h-5 border-2 rounded-sm flex-shrink-0 flex items-center justify-center transition-all duration-200 ${selectedCategories.includes(cat) ? 'bg-amber-400 border-amber-400' : 'border-gray-500 group-hover:border-amber-400'}`}>
-                                {selectedCategories.includes(cat) && <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-black" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
-                                </div>
-                                <span className="text-gray-300 group-hover:text-white transition-colors">{cat}</span>
-                            </label>
-                            ))}
-                        </div>
-                    </div>
-
-                    {selectedCategories.length > 0 && (
-                        <div className="fade-in space-y-4">
-                            <label className="block text-sm font-medium text-gray-300">Qual procedimento?</label>
-                            <div className="space-y-3 rounded-lg border border-gray-700 p-3 max-h-48 overflow-y-auto">
-                            {selectedCategories.map(category => (
-                                <div key={category}>
-                                <p className="font-semibold text-amber-300/90 text-sm mb-2">{category}</p>
-                                <div className="space-y-2 pl-2 border-l-2 border-gray-700/50">
-                                    {procedures[category].map((item) => (
-                                    <label key={item} className={`flex items-center space-x-3 group ${item.includes('(em breve)') ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}>
-                                        <input type="checkbox" checked={formData.procedure.includes(item)} onChange={() => handleProcedureChange(item)} disabled={item.includes('(em breve)')} className="sr-only"/>
-                                        <div className={`w-5 h-5 border-2 rounded-sm flex-shrink-0 flex items-center justify-center transition-all duration-200 ${formData.procedure.includes(item) ? 'bg-amber-400 border-amber-400' : 'border-gray-500 group-hover:border-amber-400'}`}>
-                                        {formData.procedure.includes(item) && <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-black" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
-                                        </div>
-                                        <span className="text-gray-300 group-hover:text-white transition-colors">{item}</span>
-                                    </label>
-                                    ))}
-                                </div>
-                                </div>
-                            ))}
-                            </div>
-                             {formData.procedure.length === 0 && <p className="text-xs text-red-400/80 pt-1">Por favor, selecione ao menos um procedimento.</p>}
-                        </div>
-                    )}
                 </div>
             )}
 
