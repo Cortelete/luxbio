@@ -23,7 +23,7 @@ const App: React.FC = () => {
     const { name, isClient, preferredPeriods, preferredWeekDays, wantsSpecificDate, specificDate, procedure } = formData;
     if (procedure.length === 0) return;
 
-    const studioPhoneNumber = '42999722042';
+    const studioPhoneNumber = '5542999722042';
     const procedureText = procedure.join(', ');
     const clientStatusText = isClient ? "Já sou cliente." : "Sou um(a) novo(a) cliente.";
 
