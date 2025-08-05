@@ -12,7 +12,7 @@ interface ModalProps {
 
 const procedures = {
   [ProcedureCategory.LASH]: ['Lash Lifting', 'Extensão de Cílios'],
-  [ProcedureCategory.BROWS]: ['Henna', 'Tintura', 'Brown Lamination'],
+  [ProcedureCategory.BROWS]: ['Henna', 'Tintura', 'Brown Lamination', 'Design Feminino', 'Design Masculino'],
   [ProcedureCategory.SKIN]: ['Radiofrequência', 'Limpeza Profunda', 'Limpeza Relaxante'],
   [ProcedureCategory.BOTOX]: ['Botox Day'],
   [ProcedureCategory.NANO]: ['Nanopigmentação (em breve)'],
