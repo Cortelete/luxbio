@@ -60,11 +60,6 @@ const App: React.FC = () => {
   return (
     <div className="bg-black min-h-screen text-white flex flex-col items-center justify-between p-4 sm:p-6 relative overflow-hidden">
       
-      {/* Background Watermark */}
-      <div className="absolute inset-0 z-0 flex items-center justify-start pointer-events-none opacity-5" aria-hidden="true">
-        <img src="/logo.png?v=3" alt="" className="w-2/3 max-w-xl -translate-x-1/4" loading="lazy" />
-      </div>
-
       <GoldenParticles />
 
       <div className="relative z-10 w-full flex flex-col items-center justify-between flex-grow min-h-screen">
@@ -88,8 +83,8 @@ const App: React.FC = () => {
             <LinkButton onClick={() => setIsModalOpen(true)}>
               Agendamentos via WhatsApp
             </LinkButton>
-            <LinkButton disabled>
-              Nosso Catálogo (em breve)
+            <LinkButton href="https://catalogolux.vercel.app/">
+              Nosso Catálogo
             </LinkButton>
           </div>
         </main>
