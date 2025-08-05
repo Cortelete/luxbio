@@ -51,7 +51,7 @@ const App: React.FC = () => {
                   `Aguardo contato, obrigado!`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${studioPhoneNumber}?text=${encodedMessage}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${studioPhoneNumber}&text=${encodedMessage}`;
     
     window.open(whatsappUrl, '_blank');
     setIsModalOpen(false);
